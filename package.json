@@ -1,0 +1,60 @@
+{
+  "name": "metaversoufg",
+  "version": "0.0.6",
+  "description": "Este repositório contém um framework para a criação de ambientes imersivos em metaverso, utilizando o framework A-Frame. Ele simplifica o desenvolvimento de aplicações 3D interativas e multiusuário, oferecendo ferramentas e funcionalidades pré-configuradas para acelerar a criação de mundos virtuais.",
+  "main": "modules/server/server.js",
+  "directories": {
+    "doc": "doc",
+    "test": "test"
+  },
+  "scripts": {
+    "api-last":"node ./server/lastGLB.js",
+    "avatar-server": "node ./server/avatar-server.js",
+    "dev": "cross-env NODE_ENV=development node ./server/easyrtc-server.js",
+    "dev-socketio": "cross-env NODE_ENV=development node ./server/socketio-server.js",
+    "dist": "npm run dist:min && npm run dist:max",
+    "dist:max": "webpack --config webpack.config.js",
+    "dist:min": "webpack --config webpack.prod.config.js",
+    "lint": "eslint src examples server tests *.js",
+    "start": "node ./server/easyrtc-server.js",
+    "start-socketio": "node ./server/socketio-server.js",
+    "test": "karma start ./tests/unit/karma.conf.js",
+    "test:firefox": "karma start ./tests/unit/karma.conf.js --browsers Firefox",
+    "test:chrome": "karma start ./tests/unit/karma.conf.js --browsers Chrome"
+  },
+  "dependencies": {
+    "@babel/core": "^7.18.5",
+    "@babel/preset-env": "^7.18.2",
+    "aframe": "~1.6.0",
+    "babel-loader": "^8.2.5",
+    "babel-plugin-istanbul": "^6.1.1",
+    "buffered-interpolation": "Infinitelee/buffered-interpolation#5bb18421ebf2bf11664645cdc7a15bd77ee2156b",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "helmet":"8.0.0",
+    "express": "^4.21.1",
+    "lint-staged": "^13.0.3",
+    "multer": "^1.4.5-lts.1",
+    "open-easyrtc": "^2.0.20",
+    "pm2": "5.4.3",
+    "socket.io": "^2.5.0",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-middleware": "^7.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/ivato/immersion/metaversoufg-aframe.git"
+  },
+  "keywords": [
+    "a-frame",
+    "metaverse",
+    "vr"
+  ],
+  "author": "metaversoufg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/ivato/immersion/metaversoufg-aframe/issues"
+  },
+  "homepage": "https://gitlab.com/ivato/immersion/metaversoufg-aframe#readme"
+}

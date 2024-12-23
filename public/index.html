@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.171.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.171.0/examples/jsm/",
+            "three/gui": "https://cdn.jsdelivr.net/npm/three@0.171.0/examples/jsm/libs/lil-gui.module.min.js",
+            "three/orbit": "https://cdn.jsdelivr.net/npm/three@0.171.0/examples/jsm/controls/OrbitControls.js"
+          }
+        }
+    </script>
+    <!--Bibliotecas-->
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="./js/networked-aframe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.5.0/socket.io.slim.js"></script>
+    <script src="/easyrtc/easyrtc.js"></script>
+    <script type="module" src="js/avatar.js"></script>
+
+    <title>MetaversoUFG</title>
+  </head>
+  <body>
+    <a-scene
+      networked-scene="
+    room: medialab;
+    debug: true;
+    adapter: easyrtc;
+    video:true;
+    audio:false;
+    "
+      renderer="physicallyCorrectLights: true;"
+    >
+      <a-assets>
+        <!-- GLB Model para Avatar -->
+        <a-asset-item
+          id="avatarModel"
+          src="./assets/avatars/padrao.glb"
+        ></a-asset-item>
+
+        <template id="rig-template">
+          <a-entity></a-entity>
+        </template>
+
+        <!-- Templates -->
+        <template id="avatar-template">
+          <a-entity class="avatar" networked-audio-source>
+            <a-entity
+              gltf-model="#avatarModel"
+              scale="1 1 1"
+              rotation="0 180 0"
+            >
+            </a-entity>
+          </a-entity>
+        </template>
+      </a-assets>
+
+      <!-- Player Rig -->
+      <a-entity id="rig" wasd-controls networked="template:#rig-template">
+        <a-entity
+          id="player"
+          networked="template:#avatar-template;attachTemplateToLocal:true"
+          camera
+          look-controls
+          position="0 0.1 5"
+        >
+        </a-entity>
+      </a-entity>
+
+
+
+
+
+
+    </a-scene>
+  </body>
+</html>
